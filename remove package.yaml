@@ -1,0 +1,15 @@
+---
+  - name: remove mariadb and postgres package
+    hosts: all
+    become: yes
+    vars:
+      list_of_pkg:
+        - 'postgresql'
+        - 'mariadb'
+    tasks:
+      - name: remove
+        yum:
+          name: "{{ item }}"
+          state: absent
+        loop: "{{ list_of_pkg }}"
+  
